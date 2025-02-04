@@ -1,0 +1,13 @@
+#product-list-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 50rem;
+    justify-content: center;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

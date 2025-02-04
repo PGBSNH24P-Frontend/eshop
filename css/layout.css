@@ -13,9 +13,3 @@ header {
 #header-right-container {
     margin-left: auto;
 }
-
-main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
