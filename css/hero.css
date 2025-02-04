@@ -1,0 +1,28 @@
+#hero-section {
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    width: 50rem;
+    height: 20rem;
+}
+
+#hero-section h1 {
+    /*max-width: 15rem;*/
+}
+
+#hero-section>div:first-child {
+    padding: 1.5rem;
+}
+
+#hero-section>div {
+    width: 50%;
+}
+
+#hero-section img {
+    width: 100%;
+    height: 100%;
+}
+
+#hero-section p {
+    font-size: 0.75rem;
+    color: hsl(0, 0%, 40%);
+}

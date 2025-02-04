@@ -1,0 +1,24 @@
+.product-item {
+    width: 15rem;
+    border: 1px solid rgb(230, 230, 230);
+}
+
+.product-item img {
+    width: 100%;
+    background-color: #F3F3F3;
+}
+
+.product-item>div {
+    padding: 0.25rem 0 0.75rem 1rem;
+}
+
+.product-item span {
+    font-size: 0.75rem;
+    color: hsl(0, 0%, 35%);
+}
+
+.product-item h3 {
+    padding: 0;
+    margin: 0.5rem 0;
+    font-weight: 500;
+}
