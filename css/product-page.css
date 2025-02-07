@@ -6,3 +6,18 @@ main {
 main>section {
     display: flex;
 }
+
+#product-images {
+    display: flex;
+    flex-direction: column;
+}
+
+#product-images>img {
+    width: 150px;
+    padding: 0.25rem;
+    border: 1px solid hsl(0, 0%, 70%);
+}
+
+#main-image {
+    background-color: hsl(0, 0%, 90%);
+}
