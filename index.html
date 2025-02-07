@@ -30,8 +30,10 @@ formulär
     <link rel="stylesheet" href="css/hero.css" />
     <link rel="stylesheet" href="css/product-item.css" />
     <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/basket.css" />
     <script type="module" src="main.js"></script>
     <script type="module" src="js/pages/home.js"></script>
+    <script type="module" src="js/components/basket.js"></script>
 </head>
 
 <body>
@@ -41,7 +43,7 @@ formulär
                 <a><img width="100px"
                         src="https://salinaka-ecommerce.web.app/images/logo-full.059e10fa5fedbfb65165e7565ed3936f.png" /></a>
                 <ul id="nav-links">
-                    <li class="nav-item"><a>Home</a></li>
+                    <li class="nav-item"><a href="/">Home</a></li>
                     <li class="nav-item"><a>Shop</a></li>
                     <li class="nav-item"><a>Featured</a></li>
                     <li class="nav-item"><a>Recommended</a></li>
@@ -49,7 +51,7 @@ formulär
             </nav>
             <div id="header-right-container">
                 <input />
-                <button>
+                <button id="basket-open-button">
                     <svg viewBox="64 64 896 896" focusable="false" data-icon="shopping" width="1em" height="1em"
                         fill="currentColor" aria-hidden="true">
                         <path
@@ -85,6 +87,13 @@ formulär
         </main>
         <footer>A</footer>
     </div>
+
+    <section class="basket-wrapper">
+        <button id="basket-close-button">Close</button>
+        <button id="basket-clear-button">Clear basket</button>
+        <h2>Basket</h2>
+        <div id="basket-items"></div>
+    </section>
 </body>
 
 </html>
