@@ -1,17 +1,23 @@
-import { products } from "../../main.js";
+import { getProduct } from "../api/product.js";
 
 const queryParameters = window.location.search;
 const querySplit = queryParameters.split("=");
 const productId = Number.parseInt(querySplit[1]);
-const product = products.find(all => all.id === productId);
+let product = undefined;
 
 let mainImageIndex = 0;
 // ?productId=5
 
 function setupProductPage() {
-    renderProductImages();
-    renderMainImage();
-    renderProductInfo();
+    getProduct(productId)
+        .then(res => {
+            product = res;
+
+            renderProductImages();
+            renderMainImage();
+            renderProductInfo();
+        })
+        .catch(err => console.error(err));
 }
 
 function renderProductImages() {
@@ -42,8 +48,8 @@ function renderProductInfo() {
     const titleElement = document.getElementById("product-title");
     const descriptionElement = document.getElementById("product-description");
 
-    categoryElement.innerText = product.category.name;
-    titleElement.innerText = product.modelName;
+    categoryElement.innerText = product.category;
+    titleElement.innerText = product.title;
     descriptionElement.innerText = product.description;
 }
 

@@ -3,7 +3,12 @@ import { Basket, BasketItem } from "../models/basket.js";
 const basketWrapper = document.getElementsByClassName("basket-wrapper")[0];
 const basketItemsElement = document.getElementById("basket-items");
 const basketClearButton = document.getElementById("basket-clear-button");
-const basket = new Basket();
+
+const basketItem = localStorage.getItem("basket");
+let basket = new Basket();
+if (basketItem !== null) {
+    basket = JSON.parse(basketItem);
+}
 
 function setupBasket() {
     const basketOpenButton = document.getElementById("basket-open-button");
@@ -26,8 +31,11 @@ function setupBasket() {
     // Rensa alla basket items
     basketClearButton.addEventListener("click", () => {
         basket.items = [];
+        saveBasketToLocalStorage();
         renderBasketItems();
     });
+
+    renderBasketItems();
 }
 
 // Lägger till en produkt i basket och visar upp dem
@@ -37,13 +45,19 @@ export function addProductToBasket(product) {
     const existing = basket.items.find(all => all.product.id == product.id);
     if (existing !== undefined) {
         existing.amount++;
+        saveBasketToLocalStorage();
         renderBasketItems();
         return;
     }
 
     const basketItem = new BasketItem(product, 1);
     basket.items.push(basketItem);
+    saveBasketToLocalStorage();
     renderBasketItems();
+}
+
+function saveBasketToLocalStorage() {
+    localStorage.setItem("basket", JSON.stringify(basket));
 }
 
 // Renderar ut (visar) alla basket items i basket boxen
@@ -62,8 +76,8 @@ function renderBasketItems() {
         const priceSpan = document.createElement("span");
 
         amountSpan.innerText = basketItem.amount + "x";
-        modelSpan.innerText = basketItem.product.modelName;
-        priceSpan.innerText = "$" + (basketItem.product.price * basketItem.amount);
+        modelSpan.innerText = basketItem.product.title;
+        priceSpan.innerText = "$" + (basketItem.product.price * basketItem.amount).toFixed(2);
 
         const incAmountButton = document.createElement("button");
         const decAmountButton = document.createElement("button");
@@ -76,6 +90,7 @@ function renderBasketItems() {
         // Click listener för att öka antal produkter
         incAmountButton.addEventListener("click", () => {
             basketItem.amount++;
+            saveBasketToLocalStorage();
             renderBasketItems();
         });
 
@@ -86,12 +101,15 @@ function renderBasketItems() {
                 basket.items = basket.items.filter(item => item.product.id !== basketItem.product.id);
             }
 
+            saveBasketToLocalStorage();
+
             renderBasketItems();
         });
 
         // Click listener för att ta bort produkt från basket
         removeButton.addEventListener("click", () => {
             basket.items = basket.items.filter(item => item.product.id !== basketItem.product.id);
+            saveBasketToLocalStorage();
             renderBasketItems();
         });
 

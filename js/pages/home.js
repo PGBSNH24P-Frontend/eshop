@@ -1,8 +1,37 @@
-import { products } from "../../main.js";
+import { getProducts } from "../api/product.js";
 import { addProductToBasket } from "../components/basket.js";
+import { Product } from "../models/product.js";
+
+export let products = [];
 
 function setupHomePage() {
-    renderProducts();
+    loadProducts();
+}
+
+function loadProducts() {
+    const productsItem = localStorage.getItem("products");
+    if (productsItem !== null) {
+        products = JSON.parse(productsItem);
+        renderProducts();
+    } else {
+        getProducts()
+            .then(res => {
+                products = res.map(product => new Product(
+                    product.id,
+                    product.title,
+                    product.brand,
+                    product.category,
+                    product.description,
+                    product.price,
+                    product.images
+                ));
+
+                localStorage.setItem("products", JSON.stringify(products));
+
+                renderProducts();
+            })
+            .catch(err => console.error(err));
+    }
 }
 
 function renderProducts() {
@@ -30,9 +59,9 @@ function renderProducts() {
 
         const informationContainer = document.createElement("div");
         const productTitle = document.createElement("h3");
-        productTitle.innerText = product.modelName;
+        productTitle.innerText = product.title;
         const productCategory = document.createElement("span");
-        productCategory.innerText = product.category.name;
+        productCategory.innerText = product.category;
 
         informationContainer.append(productTitle, productCategory);
         article.append(thumbnail, informationContainer, addToBasketButton);

@@ -20,4 +20,5 @@ main>section {
 
 #main-image {
     background-color: hsl(0, 0%, 90%);
+    width: 300px;
 }
